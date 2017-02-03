@@ -1,16 +1,16 @@
 Summary: A collection of extra tools for the Binary Analysis Tool
-Name: bat-extratools
-Version: 27.0
+Name: clarity-extratools
+Version: 28.0
 Release: 1
 License: GPLv2, GPLv2+, ASL 2.0
 Source: %{name}-%{version}.tar.gz
 Group: Development/Tools
-Packager: Armijn Hemel <armijn@binaryanalysis.org>
+Packager: Insignary Inc <tech@insignary.com>
 BuildRequires: xz-devel, lzo-devel, zlib-devel, make, gcc-c++
-Requires: lzo, xz-libs, zlib
+Requires: lzo, xz-libs, lz4, zlib
 
 %description
-A collection of extra tools for the Binary Analysis Tool, scraped from GPL source code releases and firmware replacement projects, plus projects.
+A collection of extra tools for the Clarity, scraped from GPL source code releases and firmware replacement projects, plus projects.
 
 %prep
 %setup -q
@@ -35,6 +35,7 @@ install -D -p -m 755 romfsck/bat-romfsck $RPM_BUILD_ROOT%{_bindir}/bat-romfsck
 install -D -p -m 755 code2html-0.9.1/bat-code2html $RPM_BUILD_ROOT%{_bindir}/bat-code2html
 install -D -p -m 755 bat-minix/bat-minix $RPM_BUILD_ROOT%{_bindir}/bat-minix
 install -D -p -m 755 simg2img/bat-simg2img $RPM_BUILD_ROOT%{_bindir}/bat-simg2img
+install -D -p -m 755 mkboot/mkboot $RPM_BUILD_ROOT%{_bindir}/mkboot
 %files
 %{_bindir}/bat-unsquashfs42
 %{_bindir}/bat-unsquashfs-atheros
@@ -53,3 +54,4 @@ install -D -p -m 755 simg2img/bat-simg2img $RPM_BUILD_ROOT%{_bindir}/bat-simg2im
 %{_bindir}/bat-code2html
 %{_bindir}/bat-minix
 %{_bindir}/bat-simg2img
+%{_bindir}/mkboot
