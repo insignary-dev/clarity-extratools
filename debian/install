@@ -14,3 +14,4 @@ romfsck/bat-romfsck				usr/bin
 code2html-0.9.1/bat-code2html			usr/bin
 bat-minix/bat-minix				usr/bin
 simg2img/bat-simg2img				usr/bin
+mkboot/mkboot                                   usr/bin

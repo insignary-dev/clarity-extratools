@@ -1,3 +1,10 @@
+clarity-extratools (28.0) unstable; urgency=medium
+
+  * rebranding to clarity
+  * add tool for unpacking android boot image
+
+ -- Insingnary Inc. <tech@insignary.com>  Thu, 02 Feb 2017 02:00:00 +0900
+
 bat-extratools (27.0) unstable; urgency=medium
 
   * updated bat-unyaffs to unpack more yaffs2 variants
