@@ -5,7 +5,7 @@ from pychart import *
 from optparse import OptionParser
 
 '''
-## Copyright 2012 Armijn Hemel for Tjaldur Software Governance Solutions
+## Copyright 2016-2017 Insignary Inc.
 ## Licensed under the GNU General Public License 2.0, see COPYING for details
 '''
 
