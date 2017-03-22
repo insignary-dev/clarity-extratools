@@ -1,3 +1,7 @@
+clarity-extratools (4) unstable; urgency=medium
+  * rebranding to clarity
+    * Rename and modify spec file for suiting clarity
+
 clarity-extratools (3) unstable; urgency=medium
   * rebranding to clarity
   * reboot version (clarity-extratools follows clarity's version)
