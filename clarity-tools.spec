@@ -1,7 +1,7 @@
-Summary: A collection of extra tools for the Binary Analysis Tool
+Summary: A collection of extra tools for the Clarity
 Name: clarity-extratools
-Version: 28.0
-Release: 1
+Version: 4
+Release: 0
 License: GPLv2, GPLv2+, ASL 2.0
 Source: %{name}-%{version}.tar.gz
 Group: Development/Tools
