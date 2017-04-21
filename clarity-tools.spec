@@ -1,6 +1,6 @@
 Summary: A collection of extra tools for the Clarity
 Name: clarity-extratools
-Version: 5
+Version: 7
 Release: 0
 License: GPLv2, GPLv2+, ASL 2.0
 Source: %{name}-%{version}.tar.gz
