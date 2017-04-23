@@ -4,7 +4,7 @@ INCLUDEDIR = .
 CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -O2
 LZMAPATH = ../lzma/C/7zip/Compress/LZMA_Lib
 
-all: bat-unsquashfs-realtek2
+all: clarity-unsquashfs-realtek2
 
 mksquashfs: mksquashfs.o read_fs.o sort.o
 	$(CC) mksquashfs.o read_fs.o sort.o -lz -o $@
@@ -19,7 +19,7 @@ read_fs.o: read_fs.c squashfs_fs.h read_fs.h
 
 sort.o: sort.c squashfs_fs.h 
 
-bat-unsquashfs-realtek2: unsquashfs.o
+clarity-unsquashfs-realtek2: unsquashfs.o
 	make -C $(LZMAPATH)
 	$(CXX) -O3 unsquashfs.o -L$(LZMAPATH) -llzma -o $@
 
