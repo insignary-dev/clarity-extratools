@@ -1,0 +1,11 @@
+Package: clarity-extratools
+Version: 7
+Architecture: amd64
+Maintainer: Insignary Inc. <tech@insignary.com>
+Installed-Size: 1333
+Depends: liblzo2-2, zlib1g, lzma, liblz4-tool, libc6, python (>= 2.5)
+Section: misc
+Priority: extra
+Homepage: https://www.insignary.com/
+Description: set of helper tools for the Clarity
+ clarity-extratools is a set of helper tools for the Clarity

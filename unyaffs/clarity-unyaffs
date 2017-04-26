@@ -281,7 +281,7 @@ def main(argv):
 					else:
 						os.link(os.path.join(unpackdir, objectidtofullname[equivalentObjectId]), linkname)
 				elif chunktype == YAFFS_OBJECT_TYPE_SPECIAL:
-					## root privileges are needed for this and BAT is usually run as non-root
+					## root privileges are needed for this and CLARITY is usually run as non-root
 					pass
 					#print "CHUNK special"
 				else:
