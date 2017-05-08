@@ -1,4 +1,4 @@
-all:	bat-simg2img
+all:	clarity-simg2img
 
 libsparse_files := backed_block.o output_file.o sparse.o sparse_crc32.o sparse_err.o sparse_read.o
 
@@ -8,8 +8,8 @@ libsparse_files := backed_block.o output_file.o sparse.o sparse_crc32.o sparse_e
 libsparse.a: $(libsparse_files)
 	$(AR) r $@ $^
 
-bat-simg2img: simg2img.o libsparse.a
+clarity-simg2img: simg2img.o libsparse.a
 	$(CC) -o $@ $< -I. -L. -lsparse -lz
 
 clean:
-	$(RM) *.o *.a bat-simg2img
+	$(RM) *.o *.a clarity-simg2img
