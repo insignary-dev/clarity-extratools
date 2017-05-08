@@ -1,4 +1,4 @@
-all:	squashfsbroadcom squashfsbroadcom40 squashfsralink squashfsrealtek squashfsatheros squashfsatheros2 squashfsatheros40 squashfsopenwrtold squashfsddwrt squashfs42 cramfsunpack claritysimg2img
+all:	squashfsbroadcom squashfsbroadcom40 squashfsralink squashfsrealtek squashfsatheros squashfsatheros2 squashfsatheros40 squashfsopenwrtold squashfsddwrt squashfs43 cramfsunpack claritysimg2img
 
 squashfsbroadcom:
 	cd squashfs-broadcom; make
@@ -30,8 +30,8 @@ squashfsopenwrtold:
 squashfsddwrt:
 	cd squashfs-ddwrt; make
 
-squashfs42:
-	cd squashfs4.2/squashfs-tools; make
+squashfs43:
+	cd squashfs4.3/squashfs-tools; make
 
 cramfsunpack:
 	cd cramfs; ./configure --without-ncurses; make

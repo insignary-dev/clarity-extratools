@@ -1,6 +1,6 @@
 Summary: A collection of extra tools for the Clarity
 Name: clarity-extratools
-Version: 7
+Version: 8
 Release: 0
 License: GPLv2, GPLv2+, ASL 2.0
 Source: %{name}-%{version}.tar.gz
@@ -19,7 +19,7 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 install -D -p -m 755 cramfs/disk-utils/clarity-fsck.cramfs $RPM_BUILD_ROOT%{_bindir}/clarity-fsck.cramfs
-install -D -p -m 755 squashfs4.2/squashfs-tools/clarity-unsquashfs42 $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs42
+install -D -p -m 755 squashfs4.3/squashfs-tools/clarity-unsquashfs43 $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs43
 install -D -p -m 755 squashfs-atheros/squashfs3.3/squashfs-tools/clarity-unsquashfs-atheros $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-atheros
 install -D -p -m 755 squashfs-atheros2/clarity-unsquashfs-atheros2 $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-atheros2
 install -D -p -m 755 squashfs-atheros4.0/squashfs-tools/clarity-unsquashfs-atheros40 $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-atheros40
@@ -37,7 +37,7 @@ install -D -p -m 755 clarity-minix/clarity-minix $RPM_BUILD_ROOT%{_bindir}/clari
 install -D -p -m 755 simg2img/clarity-simg2img $RPM_BUILD_ROOT%{_bindir}/clarity-simg2img
 install -D -p -m 755 mkboot/mkboot $RPM_BUILD_ROOT%{_bindir}/mkboot
 %files
-%{_bindir}/clarity-unsquashfs42
+%{_bindir}/clarity-unsquashfs43
 %{_bindir}/clarity-unsquashfs-atheros
 %{_bindir}/clarity-unsquashfs-atheros2
 %{_bindir}/clarity-unsquashfs-atheros40
