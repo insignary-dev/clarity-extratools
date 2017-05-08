@@ -1,0 +1,318 @@
+#!/usr/bin/python
+
+'''
+Yaffs2 unpacker reimplemention, heavily borrowing from unyaffs created
+by Kai Wei, later extended for other spare/chunk sizes and inband tags.
+
+(C) 2013-2016 Armijn Hemel, Tjaldur Software Governance Solutions
+
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+
+'''
+
+import sys, os, os.path, struct, json, shutil
+from optparse import OptionParser
+
+
+## some hardcoded settings copied from unyaffs.c and unyaffs.h
+## In other devices these settings are actually different
+YAFFS_OBJECTID_ROOT=1
+YAFFS_MAX_NAME_LENGTH=255
+YAFFS_MAX_ALIAS_LENGTH=159
+
+## TODO: UTF-8 tag support
+
+## These are the object types that are defined in the YAFFS2 code
+YAFFS_OBJECT_TYPE_UNKNOWN = 0
+YAFFS_OBJECT_TYPE_FILE = 1
+YAFFS_OBJECT_TYPE_SYMLINK = 2
+YAFFS_OBJECT_TYPE_DIRECTORY = 3
+YAFFS_OBJECT_TYPE_HARDLINK = 4
+YAFFS_OBJECT_TYPE_SPECIAL = 5
+
+chunktypes = [YAFFS_OBJECT_TYPE_UNKNOWN
+             , YAFFS_OBJECT_TYPE_FILE
+             , YAFFS_OBJECT_TYPE_SYMLINK
+             , YAFFS_OBJECT_TYPE_DIRECTORY
+             , YAFFS_OBJECT_TYPE_HARDLINK
+             , YAFFS_OBJECT_TYPE_SPECIAL]
+
+## flags and values used for inband tags
+EXTRA_HEADER_INFO_FLAG = 0x80000000
+EXTRA_SHRINK_FLAG = 0x40000000
+EXTRA_SHADOWS_FLAG = 0x20000000
+EXTRA_SPARE_FLAGS = 0x10000000
+ALL_EXTRA_FLAGS = 0xf0000000
+
+EXTRA_OBJECT_TYPE_SHIFT = 28
+EXTRA_OBJECT_TYPE_MASK = 0x0f << EXTRA_OBJECT_TYPE_SHIFT
+
+def main(argv):
+	parser = OptionParser()
+	parser.add_option("-b", "--binary", action="store", dest="yaffs2file", help="path to binary file", metavar="FILE")
+	parser.add_option("-d", "--directory", action="store", dest="unpackdir", help="path to unpacking directory", metavar="DIR")
+	parser.add_option("-j", "--json", action="store_true", dest="json", help="output results in JSON format")
+	parser.add_option("-n", "--offset", action="store", dest="fileoffset", help="file offset to start unpacking")
+	parser.add_option("-v", "--verbose", action="store_true", dest="verbose", help="verbose output")
+	(options, args) = parser.parse_args()
+
+	if options.yaffs2file == None:
+		parser.error("Path to yaffs2 file needed")
+	elif not os.path.exists(options.yaffs2file):
+		parser.error("yaffs2 file does not exist")
+	else:
+		yaffs2file = options.yaffs2file
+
+	if options.unpackdir == None:
+		parser.error("Path to unpack directory needed")
+	elif not os.path.exists(options.unpackdir):
+		parser.error("unpack directory does not exist")
+	if os.listdir(options.unpackdir) != []:
+		parser.error("unpack directory %s not empty" % options.unpackdir)
+	else:
+		unpackdir = options.unpackdir
+
+	if options.fileoffset != None:
+		try:
+			fileoffset = int(options.fileoffset)
+		except:
+			fileoffset = 0
+	else:
+		fileoffset = 0
+
+	yaffs2filesize = os.stat(yaffs2file).st_size
+
+	## list of observed chunk/spare values. Some of these like (4080, 16) are for
+	## file systems that have inband tags instead of out of band spares.
+	chunksandspares = [(512,16),(1024,32),(2048,64),(4096,128),(8192,256),(4080,16), (4096,16)]
+
+	image_file = open(yaffs2file, 'rb')
+	bytesread = 0
+
+	yaffsunpacked = False
+	for cs in chunksandspares:
+		image_file.seek(fileoffset)
+
+		if yaffsunpacked:
+			break
+		(CHUNK_SIZE, SPARE_SIZE) = cs
+		if yaffs2filesize < (CHUNK_SIZE + SPARE_SIZE):
+			continue
+		## reset a bunch of values
+		yaffsunpackfail = False
+		bytesread = 0
+		objectidtoname = {}
+		objectidtofullname = {}
+		objectparent = {}
+		outfile = None
+		yaffsinband = False
+		extrafilelength = 0
+		bytesToRead = 0
+		prev_sequenceNumber = -1
+		firstentry = True
+		haveroot = False
+
+		## read in the blocks of data
+		while not bytesread >= yaffs2filesize and not yaffsunpackfail:
+			chunkdata = image_file.read(CHUNK_SIZE)
+			if not len(chunkdata) == CHUNK_SIZE:
+				break
+			sparedata = image_file.read(SPARE_SIZE)
+			if not len(sparedata) == SPARE_SIZE:
+				break
+
+			## read in the spare data first and extract some metadata
+			sequenceNumber = struct.unpack('<L', sparedata[0:4])[0]
+			if sequenceNumber == 0xffffffff:
+				## move on to the next chunk
+				bytesread = bytesread + len(chunkdata) + len(sparedata)
+				continue
+
+			if sequenceNumber < prev_sequenceNumber:
+				## end of the current file system
+				break
+
+			prev_sequenceNumber = sequenceNumber
+			objectId = struct.unpack('<L', sparedata[4:8])[0]
+			chunkId = struct.unpack('<L', sparedata[8:12])[0]
+			byteCount = struct.unpack('<L', sparedata[12:16])[0]
+
+			## check if the file is a new file
+			if bytesToRead == 0:
+				if outfile != None:
+					outfile.close()
+				offset = 0
+				## new file, so process the chunk data
+				## first read in the object header
+
+				## This is defined in yaffs_guts.h in the YAFFS2 sources in
+				## yaffs_obj_hdr
+				## First the type of file: file, directory, link, etc.
+				chunktype = struct.unpack('<L', chunkdata[offset:offset+4])[0]
+
+				if not chunktype in chunktypes:
+					## continue to the next chunk/spare combination, as this
+					## is not a valid file.
+					break
+
+				offset = offset + 4
+
+				## Then the parent object id. If / is the parent object id, then this
+				## Will be YAFFS_OBJECTID_ROOT
+				parentObjectId = struct.unpack('<L', chunkdata[offset:offset+4])[0]
+				if chunkId & EXTRA_HEADER_INFO_FLAG != 0:
+					parentObjectId = chunkId & ~ALL_EXTRA_FLAGS
+					chunkId = 0
+					yaffsinband = True
+					extrafilelength = byteCount
+					byteCount = 0
+					objectId = objectId & ~EXTRA_OBJECT_TYPE_MASK
+				else:
+					yaffsinband = False
+
+				## chunk id of a new file is always 0
+				if chunkId != 0:
+					break
+
+				offset = offset + 4
+
+				## store the parent id for this object, so it can be retrieved later
+				objectparent[objectId] = parentObjectId
+
+				## Next read the checksum. This is unused, so it can be ignored
+				checksum = struct.unpack('<H', chunkdata[offset:offset+2])[0]
+				offset = offset + 2
+
+				## Then extract the name, up to the first '\x00' character
+				## and store it. The entry for the root node will have a name of
+				## length zero, so be lenient if it is the first entry.
+				yaffsname = chunkdata[offset:offset+YAFFS_MAX_NAME_LENGTH+1+2]
+				eoname = yaffsname.find('\x00')
+				yaffsname=yaffsname[:eoname]
+				if len(yaffsname) == 0 and haveroot:
+					break
+
+				objectidtoname[objectId] = yaffsname
+				offset = offset + YAFFS_MAX_NAME_LENGTH + 1 + 2
+
+				## reconstruct the full path
+				if objectId != 1 and objectidtoname.has_key(parentObjectId) and objectId != parentObjectId:
+					objectpath = yaffsname
+					newparentid = parentObjectId
+					while newparentid != 1:
+						yaffsname = os.path.join(objectidtoname[newparentid], yaffsname)
+						newparentid = objectparent[newparentid]
+					objectidtofullname[objectId] = yaffsname
+					if options.verbose:
+						print >>sys.stderr, "unpacking", yaffsname
+
+				## Then read some more data related to modes and UID/GID
+				yst_mode = struct.unpack('<L', chunkdata[offset:offset+4])[0]
+				offset = offset + 4
+
+				yst_uid = struct.unpack('<L', chunkdata[offset:offset+4])[0]
+				offset = offset + 4
+
+				yst_gid = struct.unpack('<L', chunkdata[offset:offset+4])[0]
+				offset = offset + 4
+
+				yst_atime = struct.unpack('<L', chunkdata[offset:offset+4])[0]
+				offset = offset + 4
+
+				yst_mtime = struct.unpack('<L', chunkdata[offset:offset+4])[0]
+				offset = offset + 4
+
+				yst_ctime = struct.unpack('<L', chunkdata[offset:offset+4])[0]
+				offset = offset + 4
+
+				## Read the file size. This is for files only.
+				fileSize = struct.unpack('<L', chunkdata[offset:offset+4])[0]
+				offset = offset + 4
+
+				equivalentObjectId = struct.unpack('<L', chunkdata[offset:offset+4])[0]
+				offset = offset + 4
+
+				## Then extract the alias, up to the first '\x00' character
+				## and store it
+				aliasname = chunkdata[offset:offset+YAFFS_MAX_ALIAS_LENGTH+1]
+				eoname = aliasname.find('\x00')
+				if eoname != -1:
+					aliasname = aliasname[:eoname]
+				else:
+					aliasname = None
+				offset = offset + YAFFS_MAX_ALIAS_LENGTH + 1
+
+				## Process the various chunk types. Files and links can only be created
+				## after the root entry has been seen.
+				if chunktype == YAFFS_OBJECT_TYPE_FILE and haveroot:
+					outname = os.path.join(unpackdir, yaffsname)
+					outfile = open(outname, 'wb')
+					bytesToRead = fileSize
+				elif chunktype == YAFFS_OBJECT_TYPE_SYMLINK and haveroot:
+					if aliasname != None:
+						symlink = os.path.join(unpackdir, yaffsname)
+						try:
+							os.symlink(aliasname, symlink)
+						except Exception, e:
+							pass
+							#print e
+				elif chunktype == YAFFS_OBJECT_TYPE_DIRECTORY:
+					## create the directory and move on
+					createdir = os.path.join(unpackdir, yaffsname)
+					if not firstentry:
+						try:
+							os.makedirs(createdir)
+							yaffsunpacked = True
+						except Exception, e:
+							#print e, "NAME", len(yaffsname), sequenceNumber
+							pass
+					else:
+						haveroot = True
+						firstentry = False
+				elif chunktype == YAFFS_OBJECT_TYPE_HARDLINK and haveroot:
+					## create a hard link.
+					## TODO: more sanity checks
+					linkname = os.path.join(unpackdir, yaffsname)
+					if not equivalentObjectId in objectidtofullname:
+						yaffsunpackfail = True
+						yaffsunpacked = False
+					else:
+						os.link(os.path.join(unpackdir, objectidtofullname[equivalentObjectId]), linkname)
+				elif chunktype == YAFFS_OBJECT_TYPE_SPECIAL:
+					## root privileges are needed for this and CLARITY is usually run as non-root
+					pass
+					#print "CHUNK special"
+				else:
+					print >>sys.stderr, "CHUNK unknown"
+					yaffsunpackfail = True
+			else:
+				## block with data, just write the chunkdata to the output file
+				if outfile != None:
+					outfile.write(chunkdata[:byteCount])
+					bytesToRead -= byteCount
+			bytesread = bytesread + len(chunkdata) + len(sparedata)
+
+		if outfile != None:
+			outfile.close()
+	image_file.close()
+
+	if not yaffsunpacked:
+		## some data could have been unpacked
+		rmfiles = os.listdir(unpackdir)
+		for r in rmfiles:
+			rmfile = os.path.join(unpackdir, r)
+			if not os.path.isdir(rmfile):
+				os.unlink(rmfile)
+			else:
+				shutil.rmtree(rmfile)
+		if options.verbose:
+			print >>sys.stderr, "YAFFS2 image could not be unpacked"
+		sys.exit(1)
+
+	if options.json == True:
+		print json.dumps({'bytesread': bytesread, 'offset': fileoffset})
+
+if __name__ == "__main__":
+	main(sys.argv)

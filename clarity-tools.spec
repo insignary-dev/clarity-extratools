@@ -18,40 +18,40 @@ A collection of extra tools for the Clarity, scraped from GPL source code releas
 make
 %install
 rm -rf $RPM_BUILD_ROOT
-install -D -p -m 755 cramfs/disk-utils/bat-fsck.cramfs $RPM_BUILD_ROOT%{_bindir}/bat-fsck.cramfs
-install -D -p -m 755 squashfs4.2/squashfs-tools/bat-unsquashfs42 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs42
-install -D -p -m 755 squashfs-atheros/squashfs3.3/squashfs-tools/bat-unsquashfs-atheros $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-atheros
-install -D -p -m 755 squashfs-atheros2/bat-unsquashfs-atheros2 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-atheros2
-install -D -p -m 755 squashfs-atheros4.0/squashfs-tools/bat-unsquashfs-atheros40 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-atheros40
-install -D -p -m 755 squashfs-broadcom/bat-unsquashfs-broadcom $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-broadcom
-install -D -p -m 755 squashfs-broadcom40/squashfs_4.0/bat-unsquashfs-broadcom40 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-broadcom40
-install -D -p -m 755 squashfs-openwrt/bat-unsquashfs-openwrt $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-openwrt
-install -D -p -m 755 squashfs-ddwrt/bat-unsquashfs-ddwrt $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-ddwrt
-install -D -p -m 755 squashfs-ralink/squashfs3.2-r2/squashfs-tools/bat-unsquashfs-ralink $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-ralink
-install -D -p -m 755 squashfs-realtek/squashfs-tools/bat-unsquashfs-realtek $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-realtek
-#install -D -p -m 755 squashfs-realtek2/squashfs-2.1-r2/bat-unsquashfs-realtek2 $RPM_BUILD_ROOT%{_bindir}/bat-unsquashfs-realtek2
-install -D -p -m 755 unyaffs/bat-unyaffs $RPM_BUILD_ROOT%{_bindir}/bat-unyaffs
-install -D -p -m 755 romfsck/bat-romfsck $RPM_BUILD_ROOT%{_bindir}/bat-romfsck
-install -D -p -m 755 code2html-0.9.1/bat-code2html $RPM_BUILD_ROOT%{_bindir}/bat-code2html
-install -D -p -m 755 bat-minix/bat-minix $RPM_BUILD_ROOT%{_bindir}/bat-minix
-install -D -p -m 755 simg2img/bat-simg2img $RPM_BUILD_ROOT%{_bindir}/bat-simg2img
+install -D -p -m 755 cramfs/disk-utils/clarity-fsck.cramfs $RPM_BUILD_ROOT%{_bindir}/clarity-fsck.cramfs
+install -D -p -m 755 squashfs4.2/squashfs-tools/clarity-unsquashfs42 $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs42
+install -D -p -m 755 squashfs-atheros/squashfs3.3/squashfs-tools/clarity-unsquashfs-atheros $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-atheros
+install -D -p -m 755 squashfs-atheros2/clarity-unsquashfs-atheros2 $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-atheros2
+install -D -p -m 755 squashfs-atheros4.0/squashfs-tools/clarity-unsquashfs-atheros40 $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-atheros40
+install -D -p -m 755 squashfs-broadcom/clarity-unsquashfs-broadcom $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-broadcom
+install -D -p -m 755 squashfs-broadcom40/squashfs_4.0/clarity-unsquashfs-broadcom40 $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-broadcom40
+install -D -p -m 755 squashfs-openwrt/clarity-unsquashfs-openwrt $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-openwrt
+install -D -p -m 755 squashfs-ddwrt/clarity-unsquashfs-ddwrt $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-ddwrt
+install -D -p -m 755 squashfs-ralink/squashfs3.2-r2/squashfs-tools/clarity-unsquashfs-ralink $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-ralink
+install -D -p -m 755 squashfs-realtek/squashfs-tools/clarity-unsquashfs-realtek $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-realtek
+#install -D -p -m 755 squashfs-realtek2/squashfs-2.1-r2/clarity-unsquashfs-realtek2 $RPM_BUILD_ROOT%{_bindir}/clarity-unsquashfs-realtek2
+install -D -p -m 755 unyaffs/clarity-unyaffs $RPM_BUILD_ROOT%{_bindir}/clarity-unyaffs
+install -D -p -m 755 romfsck/clarity-romfsck $RPM_BUILD_ROOT%{_bindir}/clarity-romfsck
+install -D -p -m 755 code2html-0.9.1/clarity-code2html $RPM_BUILD_ROOT%{_bindir}/clarity-code2html
+install -D -p -m 755 clarity-minix/clarity-minix $RPM_BUILD_ROOT%{_bindir}/clarity-minix
+install -D -p -m 755 simg2img/clarity-simg2img $RPM_BUILD_ROOT%{_bindir}/clarity-simg2img
 install -D -p -m 755 mkboot/mkboot $RPM_BUILD_ROOT%{_bindir}/mkboot
 %files
-%{_bindir}/bat-unsquashfs42
-%{_bindir}/bat-unsquashfs-atheros
-%{_bindir}/bat-unsquashfs-atheros2
-%{_bindir}/bat-unsquashfs-atheros40
-%{_bindir}/bat-unsquashfs-broadcom
-%{_bindir}/bat-unsquashfs-broadcom40
-%{_bindir}/bat-unsquashfs-openwrt
-%{_bindir}/bat-unsquashfs-ddwrt
-%{_bindir}/bat-unsquashfs-ralink
-%{_bindir}/bat-unsquashfs-realtek
-#%{_bindir}/bat-unsquashfs-realtek2
-%{_bindir}/bat-fsck.cramfs
-%{_bindir}/bat-unyaffs
-%{_bindir}/bat-romfsck
-%{_bindir}/bat-code2html
-%{_bindir}/bat-minix
-%{_bindir}/bat-simg2img
+%{_bindir}/clarity-unsquashfs42
+%{_bindir}/clarity-unsquashfs-atheros
+%{_bindir}/clarity-unsquashfs-atheros2
+%{_bindir}/clarity-unsquashfs-atheros40
+%{_bindir}/clarity-unsquashfs-broadcom
+%{_bindir}/clarity-unsquashfs-broadcom40
+%{_bindir}/clarity-unsquashfs-openwrt
+%{_bindir}/clarity-unsquashfs-ddwrt
+%{_bindir}/clarity-unsquashfs-ralink
+%{_bindir}/clarity-unsquashfs-realtek
+#%{_bindir}/clarity-unsquashfs-realtek2
+%{_bindir}/clarity-fsck.cramfs
+%{_bindir}/clarity-unyaffs
+%{_bindir}/clarity-romfsck
+%{_bindir}/clarity-code2html
+%{_bindir}/clarity-minix
+%{_bindir}/clarity-simg2img
 %{_bindir}/mkboot
