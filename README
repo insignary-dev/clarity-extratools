@@ -1,11 +1,11 @@
-This directory contains several packages, that are packaged for use with BAT. They are either slightly modified by the authors of BAT, or are lifted from GPL source code releases from devices, or firmware replacement projects.
+This directory contains several packages, that are packaged for use with CLARITY. They are either slightly modified by the authors of CLARITY, or are lifted from GPL source code releases from devices, or firmware replacement projects.
 
-They are completely separate from BAT and are not under the same license as BAT. Please check the individual directories for license conditions.
+They are completely separate from CLARITY and are not under the same license as CLARITY. Please check the individual directories for license conditions.
 
 Included are:
 
 * cramfs - a version of cramfs that can unpack cramfs (the standard version of Fedora can't) and which does not require root privileges
-* bat-romfsck - a script to unpack romfs file systems.
+* clarity-romfsck - a script to unpack romfs file systems.
 * simg2img lifted from https://android.googlesource.com/platform/system/core/+/master (tree a48a0f7829fdca6aec69e8829e9088f48eab2879 )
 * squashfs-atheros - a version of squashfs with LZMA compression that is used on devices that are based on certain Atheros chipsets. This is derived from squashfs+lzma from slax.org
 * squashfs-atheros2 - a version of squashfs with LZMA compression that is used on devices that are based on certain Atheros chipsets. This version is much like OpenWrt's variant.

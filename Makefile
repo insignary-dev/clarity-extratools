@@ -1,4 +1,4 @@
-all:	squashfsbroadcom squashfsbroadcom40 squashfsralink squashfsrealtek squashfsatheros squashfsatheros2 squashfsatheros40 squashfsopenwrtold squashfsddwrt squashfs42 cramfsunpack batsimg2img
+all:	squashfsbroadcom squashfsbroadcom40 squashfsralink squashfsrealtek squashfsatheros squashfsatheros2 squashfsatheros40 squashfsopenwrtold squashfsddwrt squashfs42 cramfsunpack claritysimg2img
 
 squashfsbroadcom:
 	cd squashfs-broadcom; make
@@ -35,7 +35,7 @@ squashfs42:
 
 cramfsunpack:
 	cd cramfs; ./configure --without-ncurses; make
-	mv cramfs/disk-utils/fsck.cramfs cramfs/disk-utils/bat-fsck.cramfs
+	mv cramfs/disk-utils/fsck.cramfs cramfs/disk-utils/clarity-fsck.cramfs
 
-batsimg2img:
+claritysimg2img:
 	cd simg2img; make

@@ -5,7 +5,7 @@ LZMAPATH = ./lzma/C/7zip/Compress/LZMA_Lib
 CFLAGS := -I$(INCLUDEDIR) -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -O2 -D_LZMA_PARAMS 
 
 #all: mksquashfs-lzma unsquashfs
-all: bat-unsquashfs-ddwrt
+all: clarity-unsquashfs-ddwrt
 
 mksquashfs: mksquashfs.o read_fs.o sort.o
 	$(CC) mksquashfs.o read_fs.o sort.o -lz -o $@
@@ -20,7 +20,7 @@ read_fs.o: read_fs.c squashfs_fs.h read_fs.h global.h
 
 sort.o: sort.c squashfs_fs.h global.h sort.h
 
-bat-unsquashfs-ddwrt: unsquashfs.o
+clarity-unsquashfs-ddwrt: unsquashfs.o
 	#$(CC) unsquashfs.o -lz -o $@
 	make -C $(LZMAPATH)
 	$(CXX) unsquashfs.o -L$(LZMAPATH) -llzma -lpthread -o $@

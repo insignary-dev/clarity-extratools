@@ -9,7 +9,7 @@ endif
 CFLAGS += -I${Sqlzma} -D_REENTRANT -DNDEBUG ${DebugFlags}
 LDLIBS += -L${LzmaAlone} -L${LzmaC} -lunlzma -lz
 #Tgt = mksquashfs unsquashfs
-Tgt = bat-unsquashfs-ralink
+Tgt = clarity-unsquashfs-ralink
 
 all: ${Tgt}
 
@@ -31,7 +31,7 @@ unsquashfs.o: unsquashfs.c squashfs_fs.h read_fs.h global.h \
 
 #unsquashfs: LDLIBS += -lunlzma
 #unsquashfs: unsquashfs.o
-bat-unsquashfs-ralink:	unsquashfs.o
+clarity-unsquashfs-ralink:	unsquashfs.o
 	$(CC) unsquashfs.o $(LDLIBS) -o $@
 
 clean:
