@@ -1947,7 +1947,7 @@ configure:12515: $? = 0
 configure:12515: result: yes
 configure:12515: checking for getexecname
 configure:12515: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccoyP7gD.o: In function `main':
+/tmp/cco0YA7S.o: In function `main':
 /home/blueguy/Work/clarity/bat-extratools/cramfs/conftest.c:119: undefined reference to `getexecname'
 collect2: error: ld returned 1 exit status
 configure:12515: $? = 1
@@ -2104,7 +2104,7 @@ configure:12515: $? = 0
 configure:12515: result: yes
 configure:12515: checking for strnchr
 configure:12515: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccnSCo4Z.o: In function `main':
+/tmp/ccwWGsG4.o: In function `main':
 /home/blueguy/Work/clarity/bat-extratools/cramfs/conftest.c:125: undefined reference to `strnchr'
 collect2: error: ld returned 1 exit status
 configure:12515: $? = 1
@@ -2252,7 +2252,7 @@ configure:12515: $? = 0
 configure:12515: result: yes
 configure:12515: checking for getmntinfo
 configure:12515: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccmQL2tb.o: In function `main':
+/tmp/ccEUQuQh.o: In function `main':
 /home/blueguy/Work/clarity/bat-extratools/cramfs/conftest.c:128: undefined reference to `getmntinfo'
 collect2: error: ld returned 1 exit status
 configure:12515: $? = 1
@@ -2391,7 +2391,7 @@ configure: failed program was:
 configure:12515: result: no
 configure:12515: checking for __secure_getenv
 configure:12515: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/cc9GK1ce.o: In function `main':
+/tmp/ccNZeFjo.o: In function `main':
 /home/blueguy/Work/clarity/bat-extratools/cramfs/conftest.c:128: undefined reference to `__secure_getenv'
 collect2: error: ld returned 1 exit status
 configure:12515: $? = 1
@@ -2820,7 +2820,7 @@ configure:13031: $? = 0
 configure:13031: ./conftest
 configure:13031: $? = 0
 configure:13063: gcc -o conftest  -g -O2   conftest.c  >&5
-/tmp/cclpYNAW.o: In function `main':
+/tmp/ccx53ly2.o: In function `main':
 /home/blueguy/Work/clarity/bat-extratools/cramfs/conftest.c:107: undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
 configure:13063: $? = 1
@@ -3011,7 +3011,7 @@ configure:15781: result: yes
 configure:15781: checking for crypt.h
 configure:15781: result: yes
 configure:15811: gcc -o conftest -g -O2   conftest.c -ltermcap -lutil  >&5
-/tmp/cc0ns4qy.o: In function `main':
+/tmp/ccyj3VTB.o: In function `main':
 /home/blueguy/Work/clarity/bat-extratools/cramfs/conftest.c:130: undefined reference to `crypt'
 collect2: error: ld returned 1 exit status
 configure:15811: $? = 1
