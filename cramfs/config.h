@@ -178,7 +178,7 @@
 /* #undef HAVE_LIBSELINUX */
 
 /* Define to 1 if you have the `termcap' library (-ltermcap). */
-/* #undef HAVE_LIBTERMCAP */
+#define HAVE_LIBTERMCAP 1
 
 /* Define to 1 if you have the `utempter' library (-lutempter). */
 /* #undef HAVE_LIBUTEMPTER */
@@ -187,7 +187,7 @@
 #define HAVE_LIBUTIL 1
 
 /* Define to 1 if you have the -luuid. */
-/* #undef HAVE_LIBUUID */
+#define HAVE_LIBUUID 1
 
 /* Define to 1 if you have the `z' library (-lz). */
 #define HAVE_LIBZ 1
@@ -436,10 +436,10 @@
 #define HAVE_USLEEP 1
 
 /* Define to 1 if you want to use uuid daemon. */
-/* #undef HAVE_UUIDD */
+#define HAVE_UUIDD 1
 
 /* Define to 1 if you have the <uuid.h> header file. */
-/* #undef HAVE_UUID_H */
+#define HAVE_UUID_H 1
 
 /* Define to 1 if you have the <uuid/uuid.h> header file. */
 /* #undef HAVE_UUID_UUID_H */
