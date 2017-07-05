@@ -1,7 +1,7 @@
 ca99949d96ce4fef6b7db9c5aaaf482c  usr/bin/clarity-code2html
-5bbfb442cbc1e9722d4aaabe2343a7e1  usr/bin/clarity-fsck.cramfs
+c9a5f826428da7ddf34eee9928d6add5  usr/bin/clarity-fsck.cramfs
 63ce5b4eca37c0b115d7d399cfdfe1d0  usr/bin/clarity-minix
-e8065c1837f8248269b2372a66edd10d  usr/bin/clarity-romfsck
+171170dece4e0d5fb7dc98964627fc32  usr/bin/clarity-romfsck
 2a61df1c3167e90cd950194f84f8b2e1  usr/bin/clarity-simg2img
 57bc670a114c237b2db3a6211d07ec73  usr/bin/clarity-unsquashfs-atheros
 d77fb4aa1a071d18fd55f042f0c00ee2  usr/bin/clarity-unsquashfs-atheros2
@@ -12,8 +12,8 @@ ef773724f7ff6bd9f2692c3dc8c451cf  usr/bin/clarity-unsquashfs-broadcom
 b78576358c50b9dcc360a9e2a0ad163c  usr/bin/clarity-unsquashfs-openwrt
 8ff12b5bb717d17b4dbd9b012e423ebf  usr/bin/clarity-unsquashfs-ralink
 596be2ce430163103d5b082bc14d7bec  usr/bin/clarity-unsquashfs-realtek
-c78d0cdb50f8528a3160f4bcf7b3aac5  usr/bin/clarity-unsquashfs42
+b5c9af32bc4103674863c34ff6b38ee6  usr/bin/clarity-unsquashfs43
 c421e52ccaf026b8fe776a80bb81ee9d  usr/bin/clarity-unyaffs
 585c69604c5ce6ebe2afc8b310116e10  usr/bin/mkboot
-d1dbfa1eed3deb90c324fd7ffdae3761  usr/share/doc/clarity-extratools/changelog.gz
+ece0a7f4d6f259d215b6df5115c3646f  usr/share/doc/clarity-extratools/changelog.gz
 11172e90ba666bbdd0512c2d4460307e  usr/share/doc/clarity-extratools/copyright

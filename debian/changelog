@@ -1,3 +1,40 @@
+clarity-extratools (14) unstable; urgency=medium
+  * version bump to keep in sync with the clarity
+
+ -- Insignary Inc. <tech@insignary.com>  Sun, 02 Jul 2017 09:00:00 +0900
+
+
+clarity-extratools (13) unstable; urgency=medium
+  * version bump to keep in sync with the clarity
+
+ -- Insignary Inc. <tech@insignary.com>  Tue, 27 Jun 2017 18:00:00 +0900
+
+clarity-extratools (12) unstable; urgency=medium
+  * version bump to keep in sync with the clarity
+
+ -- Insignary Inc. <tech@insignary.com>  Tue, 27 Jun 2017 16:00:00 +0900
+
+clarity-extratools (11) unstable; urgency=medium
+  * version bump to keep in sync with the clarity
+
+ -- Insignary Inc. <tech@insignary.com>  Tue, 27 Jun 2017 11:00:00 +0900
+
+clarity-extratools (10) unstable; urgency=medium
+  * version bump to keep in sync with the clarity
+
+ -- Insignary Inc. <tech@insignary.com>  Fri, 2 Jun 2017 17:00:00 +0900
+
+clarity-extratools (9) unstable; urgency=medium
+  * version bump to keep in sync with the rest
+
+ -- Insignary Inc. <tech@insignary.com>  Thu, 25 May 2017 10:00:00 +0900
+
+clarity-extratools (8) unstable; urgency=medium
+  * Rebranding to Clarity
+  * Update squashfs-tools
+
+ -- Insignary Inc. <tech@insignary.com>  Wed, 24 May 2017 17:00:00 +0900
+
 clarity-extratools (7) unstable; urgency=medium
   * version bump to keep in sync with the rest
 

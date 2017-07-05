@@ -48,7 +48,7 @@ fsck.cramfs.o: fsck.cramfs.c /usr/include/stdc-predef.h ../config.h \
  /usr/include/x86_64-linux-gnu/bits/uio.h \
  /usr/include/x86_64-linux-gnu/bits/stat.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl2.h /usr/include/zlib.h \
- /usr/include/x86_64-linux-gnu/zconf.h \
+ /usr/include/zconf.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
  /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
@@ -207,7 +207,7 @@ fsck.cramfs.o: fsck.cramfs.c /usr/include/stdc-predef.h ../config.h \
 
 /usr/include/zlib.h:
 
-/usr/include/x86_64-linux-gnu/zconf.h:
+/usr/include/zconf.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h:
 
