@@ -1,3 +1,8 @@
+clarity-extratools (15) unstable; urgency=medium
+  * version bump to keep in sync with the clarity
+
+ -- Insignary Inc. <tech@insignary.com>  Tue, 18 Jul 2017 16:30:00 +0900
+
 clarity-extratools (14) unstable; urgency=medium
   * version bump to keep in sync with the clarity
 
