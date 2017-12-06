@@ -169,7 +169,7 @@
 /* #undef HAVE_LIBMOUNT_MOUNT */
 
 /* Define to 1 if you have the `ncurses' library (-lncurses). */
-/* #undef HAVE_LIBNCURSES */
+#define HAVE_LIBNCURSES 1
 
 /* Define to 1 if you have the `ncursesw' library (-lncursesw). */
 /* #undef HAVE_LIBNCURSESW */
@@ -187,7 +187,7 @@
 #define HAVE_LIBUTIL 1
 
 /* Define to 1 if you have the -luuid. */
-#define HAVE_LIBUUID 1
+/* #undef HAVE_LIBUUID */
 
 /* Define to 1 if you have the `z' library (-lz). */
 #define HAVE_LIBZ 1
@@ -250,7 +250,7 @@
 /* #undef HAVE_NCURSESW_NCURSES_H */
 
 /* Define to 1 if you have the <ncurses.h> header file. */
-/* #undef HAVE_NCURSES_H */
+#define HAVE_NCURSES_H 1
 
 /* Define to 1 if you have the <ncurses/ncurses.h> header file. */
 /* #undef HAVE_NCURSES_NCURSES_H */
@@ -436,10 +436,10 @@
 #define HAVE_USLEEP 1
 
 /* Define to 1 if you want to use uuid daemon. */
-#define HAVE_UUIDD 1
+/* #undef HAVE_UUIDD */
 
 /* Define to 1 if you have the <uuid.h> header file. */
-#define HAVE_UUID_H 1
+/* #undef HAVE_UUID_H */
 
 /* Define to 1 if you have the <uuid/uuid.h> header file. */
 /* #undef HAVE_UUID_UUID_H */
