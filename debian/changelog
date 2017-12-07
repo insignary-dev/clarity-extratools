@@ -1,3 +1,8 @@
+clarity-extratools (18) unstable; urgency=medium
+  * make up codes for external release
+
+ -- Insignary Inc. <tech@insignary.com>  Thu, 7 Dec 2017 11:00:00 +0900
+
 clarity-extratools (17) unstable; urgency=medium
   * version bump to keep in sync with the clarity
 

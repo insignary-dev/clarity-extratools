@@ -38,4 +38,5 @@ clean:
 	rm -f unsquashfs.exe
 	rm -f mksquashfs-lzma.exe
 	rm -f unsquashfs-lzma.exe
+	rm -f clarity-unsquashfs-realtek2
 	make -C $(LZMAPATH) clean

@@ -47,7 +47,7 @@ unsquashfs.o: unsquashfs.h unsquashfs.c squashfs_fs.h squashfs_swap.h squashfs_c
     ${LzmaAlone}/liblzma_r.a ${LzmaC}/libunlzma_r.a
 
 clean:
-	-rm -f *.o mksquashfs unsquashfs
+	-rm -f *.o mksquashfs unsquashfs clarity-unsquashfs-broadcom40
 
 install: mksquashfs unsquashfs
 	mkdir -p $(INSTALL_DIR)

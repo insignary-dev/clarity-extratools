@@ -259,7 +259,7 @@ unsquashfs_xattr.o: unsquashfs_xattr.c unsquashfs.h squashfs_fs.h xattr.h
 
 .PHONY: clean
 clean:
-	-rm -f *.o mksquashfs unsquashfs
+	-rm -f *.o mksquashfs unsquashfs clarity-unsquashfs-realtek 
 
 .PHONY: install
 install: mksquashfs unsquashfs

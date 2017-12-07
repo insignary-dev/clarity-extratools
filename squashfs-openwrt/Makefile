@@ -13,3 +13,5 @@ liblzma.a:
 	$(MAKE) -C $(LZMAPATH)
 
 clean:
+	rm -f *.o
+	rm -f clarity-unsquashfs-openwrt
