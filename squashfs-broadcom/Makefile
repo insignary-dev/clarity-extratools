@@ -20,7 +20,7 @@ clarity-unsquashfs-broadcom: unsquashfs.o $(LZMAOBJS) sqlzma.o
 	$(CC) unsquashfs.o  sqlzma.o $(LZMAOBJS) -lz -lpthread -lm -o $@
 
 clean:
-	-rm -f *.o mksquashfs unsquashfs
+	-rm -f *.o mksquashfs unsquashfs clarity-unsquashfs-broadcom
 
 install: mksquashfs unsquashfs
 	mkdir -p $(INSTALL_DIR)
