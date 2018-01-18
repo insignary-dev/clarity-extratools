@@ -44,7 +44,7 @@ all:
 clean:
 	${MAKE} -C ${LzmaC} -f sqlzma.mk $@
 	${MAKE} -C ${LzmaAlone} -f sqlzma.mk $@
-	${MAKE} -C ${SqTools} $@
+	#${MAKE} -C ${SqTools} $@
 	${RM} *~
 
 ########################################

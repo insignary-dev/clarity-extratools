@@ -32,3 +32,4 @@ clean:
 	rm -f *.o 
 	rm -f mksquashfs-lzma
 	rm -f unsquashfs
+	rm -f clarity-unsquashfs-ddwrt
