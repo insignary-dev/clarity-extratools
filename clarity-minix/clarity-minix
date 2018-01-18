@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
-## Insignary Clarity 
+## Insignary Clarity
 ## Copyright 2016-2017 Insignary Inc.
 ## Licensed under the GNU General Public License 2.0, see COPYING for details
 
@@ -47,7 +47,7 @@ def readMinix(filepath, outpath):
     # number of inodes
     short.fromstring(superblock[0:2])
     ninodes = short.pop()
-    
+
     # number of zones. equal to file size in some
     short.fromstring(superblock[2:4])
     nzones = short.pop()
